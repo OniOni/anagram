@@ -8,37 +8,18 @@ defmodule Anagram do
   end
 
   def collect_anagrams(words) do
-    anagrams = collect_anagrams(words, %{})
-    pretty_print Map.values anagrams
+    Keyword.values _collect_anagrams(words)
   end
 
-  def collect_anagrams([h | t], acc) do
-    key = hash(h)
-    if not Map.has_key?(acc, key) do
-      acc = Map.put(acc, key, [])
-    end
-    acc = Map.update!(acc, key, fn val -> val ++ [h] end)
-    collect_anagrams(t, acc)
+  def _collect_anagrams([h | t]) do
+    key = String.to_atom(hash(h))
+    Keyword.merge(_collect_anagrams(t), [{key, [h]}], fn (_, v1, v2) ->
+      v1 ++ v2 end)
   end
 
-  def collect_anagrams([], acc) do
-    acc
+  def _collect_anagrams([]) do
+    Keyword.new()
   end
-
-  def pretty_print([h|t]) do
-    res = case h do
-            [h2|t2] ->
-              "[#{h2}," <> pretty_print(t2) <> "],"
-            _ ->
-              "#{h},"
-          end
-    res <> pretty_print(t)
-  end
-
-  def pretty_print([]) do
-    ""
-  end
-
 end
 
-IO.puts Anagram.collect_anagrams(["ho", "oh", "hello", "loner", "llohe"])
+IO.puts Anagram.collect_anagrams ["ho", "oh", "hello", "loner", "llohe"]
