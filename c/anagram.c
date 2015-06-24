@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+#include "list.h"
 
 typedef struct _hash_t {
   int sum;
@@ -25,6 +28,18 @@ int is_anagram(char w1[], char w2[]) {
   return eq(hash(w1), hash(w2));
 }
 
+char** collect_anagrams(char* anagrams[], int len) {
+  char** ret = (char**) malloc(len * sizeof(char));
+  return ret;
+}
+
 int main(int argc, char* argv[]) {
-  printf("'lol', 'llo' -> %d\n", is_anagram("lol", "llo"));
+  char* input[] = {"lol", "llo"};
+  char* output[2];
+
+  collect_anagrams(input, 2);
+
+  list_t* list = list_new();
+  list = list_append(list, "lol");
+  pretty_print(list);
 }
