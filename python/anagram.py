@@ -1,7 +1,5 @@
-import functools
-
 def _hash(word):
-    return functools.reduce(lambda x,y: x + y, sorted([c for c in word]))
+    return "".join(sorted(word))
 
 def is_anagram(w1, w2):
     return _hash(w1) == _hash(w2)
