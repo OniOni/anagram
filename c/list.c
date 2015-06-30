@@ -36,7 +36,9 @@ list_t* list_append(list_t* list, char val[]) {
 }
 
 void pretty_print(list_t* list) {
-  for (node* n = list->head; n->next != NULL; n = n->next) {
+  printf("Pretty printing list of length %d\n", list->len);
+  for (node* n = list->head; n != NULL; n = n->next) {
     printf("%s,", n->val);
   }
+  puts("\n");
 }
