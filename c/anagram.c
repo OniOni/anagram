@@ -41,5 +41,6 @@ int main(int argc, char* argv[]) {
 
   list_t* list = list_new();
   list = list_append(list, "lol");
+  list = list_append(list, "lool");
   pretty_print(list);
 }
